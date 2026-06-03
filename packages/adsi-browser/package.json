@@ -1,6 +1,6 @@
 {
   "name": "adsi-browser-collector",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Optional Playwright browser collector for ADSI v3.",
   "type": "module",
   "bin": {

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "adsi-agent-kit"
-version = "3.0.0"
+version = "3.0.1"
 description = "AI Design Slop Index audit engine, schema, CLI, and agent adapters."
 readme = "README.md"
 requires-python = ">=3.10"

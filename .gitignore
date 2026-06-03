@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.pytest_cache/
+node_modules/
+*.tgz
+.DS_Store
+*.sarif
+reports/prepublish_*
+publish/

@@ -1,0 +1,197 @@
+{
+  "metadata": {
+    "product": "CORELASI Web",
+    "screen": "Dashboard Admin",
+    "auditor": "ChatGPT ADSI v1.0 visual audit",
+    "date": "2026-06-03",
+    "rubric_version": "1.0.0",
+    "input_artifacts": [
+      "examples/corelasi_dashboard_reference.png"
+    ]
+  },
+  "areas": [
+    {
+      "code": "A",
+      "name": "Realisme Data & Domain",
+      "weight": 15,
+      "severity": 2.5,
+      "weighted_score": 7.5,
+      "evidence": [
+        "Metric cards show 42 active sessions, 3 attendance review items, and 5 incomplete journals, while the visible table shows only four rows without scope text."
+      ],
+      "recommended_fix": [
+        "Add scope copy such as 'Menampilkan 4 dari 42 sesi hari ini' and data freshness text."
+      ],
+      "acceptance_criteria": [
+        "Every top metric can be traced to a visible scope, filter, or drill-down."
+      ]
+    },
+    {
+      "code": "B",
+      "name": "Kejelasan Workflow",
+      "weight": 12,
+      "severity": 2,
+      "weighted_score": 4.8,
+      "evidence": [
+        "Problem cards communicate issues but do not clearly expose next actions for admin review."
+      ],
+      "recommended_fix": [
+        "Add CTAs or clickable drill-downs: Tinjau Absensi, Lihat Jurnal Kosong, Lihat Semua Sesi."
+      ],
+      "acceptance_criteria": [
+        "Admin can navigate from each alert to the corresponding filtered worklist."
+      ]
+    },
+    {
+      "code": "C",
+      "name": "Konsistensi Design System",
+      "weight": 12,
+      "severity": 1,
+      "weighted_score": 2.4,
+      "evidence": [
+        "Cards, badges, icon style, radius, and spacing are mostly consistent."
+      ],
+      "recommended_fix": [
+        "Preserve existing visual system; only tighten any inconsistent chip usage."
+      ],
+      "acceptance_criteria": [
+        "No new component variants unless needed for a distinct state."
+      ]
+    },
+    {
+      "code": "D",
+      "name": "Hirarki Informasi",
+      "weight": 10,
+      "severity": 1,
+      "weighted_score": 2.0,
+      "evidence": [
+        "Page hierarchy is clear, but Dashboard Overview and Dashboard Admin are mildly repetitive."
+      ],
+      "recommended_fix": [
+        "Rename breadcrumb/header label to a more localized and less repetitive pattern."
+      ],
+      "acceptance_criteria": [
+        "Primary page title and breadcrumb communicate different levels of context."
+      ]
+    },
+    {
+      "code": "E",
+      "name": "Copywriting & Lokalisasi",
+      "weight": 10,
+      "severity": 2,
+      "weighted_score": 4.0,
+      "evidence": [
+        "Mostly Indonesian UI contains English phrase 'Dashboard Overview' and ambiguous '+12 bulan ini'."
+      ],
+      "recommended_fix": [
+        "Use consistent Indonesian labels and clarify microcopy such as '+12 pengguna bulan ini'."
+      ],
+      "acceptance_criteria": [
+        "All user-facing text follows one language style unless intentionally branded."
+      ]
+    },
+    {
+      "code": "F",
+      "name": "State & Status Logic",
+      "weight": 10,
+      "severity": 2,
+      "weighted_score": 4.0,
+      "evidence": [
+        "Status labels 'Hadir', 'Sudah Diisi', 'Perlu Ditinjau', 'Belum Diisi', 'Belum Mengisi', and 'Aktif' overlap. 'Aktif' appears in the time column."
+      ],
+      "recommended_fix": [
+        "Separate session status, attendance status, and journal status; standardize label vocabulary."
+      ],
+      "acceptance_criteria": [
+        "Each status belongs to a documented category and appears in the correct column or component."
+      ]
+    },
+    {
+      "code": "G",
+      "name": "Aksesibilitas",
+      "weight": 10,
+      "severity": 1.5,
+      "weighted_score": 3.0,
+      "evidence": [
+        "Some pastel badges and small gray text may have weak contrast, and dot color is used as a status cue."
+      ],
+      "recommended_fix": [
+        "Improve contrast, add text labels and aria-labels, ensure focus-visible states."
+      ],
+      "acceptance_criteria": [
+        "Status remains understandable without color and clickable elements have visible focus states."
+      ]
+    },
+    {
+      "code": "H",
+      "name": "Layout & Responsiveness",
+      "weight": 8,
+      "severity": 1,
+      "weighted_score": 1.6,
+      "evidence": [
+        "Desktop layout is good, but right panel and vertical scroll density should be verified at smaller widths."
+      ],
+      "recommended_fix": [
+        "Check responsive breakpoints and make right panel stacking intentional."
+      ],
+      "acceptance_criteria": [
+        "Dashboard remains usable at desktop, tablet, and narrow screen widths."
+      ]
+    },
+    {
+      "code": "I",
+      "name": "Orisinalitas Visual",
+      "weight": 8,
+      "severity": 2,
+      "weighted_score": 3.2,
+      "evidence": [
+        "Visual style is polished but still resembles a generic modern admin dashboard."
+      ],
+      "recommended_fix": [
+        "Add domain-specific operational details instead of decorative novelty."
+      ],
+      "acceptance_criteria": [
+        "Product identity is strengthened through useful academic/admin context."
+      ]
+    },
+    {
+      "code": "J",
+      "name": "Production Readiness",
+      "weight": 5,
+      "severity": 2,
+      "weighted_score": 2.0,
+      "evidence": [
+        "No visible filters, loading/empty/error states, or drill-down affordances are shown."
+      ],
+      "recommended_fix": [
+        "Add filters, operational links, and states where the component already supports data fetching."
+      ],
+      "acceptance_criteria": [
+        "Screen has usable states and controls for real operational use."
+      ]
+    }
+  ],
+  "total_score": 34.5,
+  "rounded_score": 35,
+  "band": "mild_moderate_slop",
+  "summary": "The dashboard is visually polished and generally consistent, but shows mild–moderate AI design slop in data scope, workflow actionability, status taxonomy, localization, accessibility, and production readiness.",
+  "priority_fixes": [
+    "Clarify data scope and freshness across metric cards and operational table.",
+    "Turn alert cards into actionable review paths.",
+    "Separate and standardize status taxonomy.",
+    "Localize and clarify ambiguous copy.",
+    "Add filters, drill-downs, and accessible status/focus states."
+  ],
+  "before_after_target": {
+    "baseline_score": 35,
+    "target_score": 19,
+    "must_reduce": [
+      "A",
+      "B",
+      "E",
+      "F",
+      "G",
+      "J"
+    ]
+  }
+}

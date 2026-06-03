@@ -1,0 +1,7 @@
+{
+  "action": "scan",
+  "target": "dashboard admin",
+  "raw": "/adsi scan dashboard admin",
+  "confidence": 0.95,
+  "notes": []
+}

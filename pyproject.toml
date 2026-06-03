@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adsi-agent-kit"
+version = "3.0.0"
+description = "AI Design Slop Index audit engine, schema, CLI, and agent adapters."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "ADSI Maintainers"}]
+keywords = ["ui-audit", "ai-slop", "design-system", "agent", "quality-gate"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: OS Independent",
+]
+
+[project.scripts]
+adsi = "adsi.cli:main"
+
+[tool.setuptools]
+packages = ["adsi"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+adsi = ["data/*.json"]
+
+[project.urls]
+Homepage = "https://github.com/musyaf4x/ADSI"
+Repository = "https://github.com/musyaf4x/ADSI"
+Issues = "https://github.com/musyaf4x/ADSI/issues"
+
+[project.optional-dependencies]
+browser = ["playwright>=1.40"]
+dev = ["pytest>=8"]
+publish = ["build>=1", "twine>=5"]

@@ -1,0 +1,19 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+include MANIFEST.in
+recursive-include adsi/data *.json
+recursive-include schemas *.json
+recursive-include rubric *.json
+recursive-include rules *.md
+recursive-include prompts *.md
+recursive-include adapters *
+recursive-include docs *.md *.txt
+recursive-include examples *.html *.json *.md *.png
+recursive-include playbooks *.md
+recursive-include tests *.py *.json
+recursive-include packages/adsi-browser *
+prune .github
+prune dist
+prune build
+prune *.egg-info

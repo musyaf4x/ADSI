@@ -1,0 +1,39 @@
+{
+  "name": "adsi-browser-collector",
+  "version": "3.0.0",
+  "description": "Optional Playwright browser collector for ADSI v3.",
+  "type": "module",
+  "bin": {
+    "adsi-browser-collector": "bin/adsi-browser-collector.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "playwright": "^1.0.0"
+  },
+  "license": "MIT",
+  "files": [
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/musyaf4x/ADSI.git",
+    "directory": "packages/adsi-browser"
+  },
+  "keywords": [
+    "adsi",
+    "playwright",
+    "ui-audit",
+    "browser-collector",
+    "ai-slop"
+  ],
+  "scripts": {
+    "pack:check": "npm pack --dry-run"
+  }
+}

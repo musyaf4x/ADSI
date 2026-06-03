@@ -1,0 +1,957 @@
+{
+  "metadata": {
+    "product": "ADSI Demo",
+    "screen": "Sloppy Dashboard after ADSI repair demo",
+    "auditor": "ADSI Engine v3 static scan",
+    "date": "2026-06-03",
+    "rubric_version": "3.0.0",
+    "mode": "static_code",
+    "input_artifacts": [
+      "examples/sloppy_dashboard.html"
+    ]
+  },
+  "areas": [
+    {
+      "code": "A",
+      "name": "Realisme Data & Domain",
+      "weight": 15.0,
+      "severity": 3.5,
+      "weighted_score": 10.5,
+      "evidence": [
+        "[mock-data] sloppy_dashboard.html:20 — Mock/demo/hardcoded data signal found in UI path. Evidence: Absen</p>         <p>Coming soon</p>       </div>       <script>         const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)",
+        "[mock-data] sloppy_dashboard.html:21 — Mock/demo/hardcoded data signal found in UI path. Evidence: const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e) {}       </script>     </main>",
+        "[dummy-copy] sloppy_dashboard.html:15 — Placeholder/dummy data or copy found. Evidence: /svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pend",
+        "[dummy-copy] sloppy_dashboard.html:15 — Placeholder/dummy data or copy found. Evidence: n>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Complet"
+      ],
+      "recommended_fix": [
+        "Move demo data behind fixtures and connect production UI to real data contracts.",
+        "Replace placeholder content with domain-realistic data and explicit data scope.",
+        "Add scope, period, filter, and freshness copy near each metric."
+      ],
+      "acceptance_criteria": [
+        "Top metrics and table values expose period/scope/source/freshness and can be traced to real data contracts.",
+        "Re-run ADSI gate and reduce this area severity below 2 before release."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 13,
+        "confidence": 0.8
+      }
+    },
+    {
+      "code": "B",
+      "name": "Kejelasan Workflow",
+      "weight": 12.0,
+      "severity": 1.6,
+      "weighted_score": 3.84,
+      "evidence": [
+        "[dead-href] sloppy_dashboard.html:9 — Dead link/CTA found. Evidence: le=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720",
+        "[coming-soon] sloppy_dashboard.html:17 — Unfinished workflow copy found. Evidence: us: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>       <script>         const mockData = [{ name: 'Jane Doe', s",
+        "[passive-alert] sloppy_dashboard.html:14 — Problem/alert language found; verify it has an action path. Evidence: tar.png\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>"
+      ],
+      "recommended_fix": [
+        "Replace dead href with a real route, disabled state explanation, or remove CTA.",
+        "Provide a real fallback path, permission reason, or release-gated state.",
+        "Pair each alert with owner, next action, due time, and filtered worklist route."
+      ],
+      "acceptance_criteria": [
+        "Each alert, metric, or problem card has a concrete CTA, owner, route, or disabled-state reason.",
+        "Re-run ADSI gate and reduce this area severity below 2 before release."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 3,
+        "confidence": 0.9
+      }
+    },
+    {
+      "code": "C",
+      "name": "Konsistensi Design System",
+      "weight": 12.0,
+      "severity": 0.9,
+      "weighted_score": 2.16,
+      "evidence": [
+        "[inline-style] sloppy_dashboard.html:7 — Inline style found. Evidence: 1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href",
+        "[tailwind-arbitrary] sloppy_dashboard.html:7 — Arbitrary utility class found. Evidence: oard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>",
+        "[tailwind-arbitrary] sloppy_dashboard.html:11 — Arbitrary utility class found. Evidence: ef=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button>",
+        "[hex-color] sloppy_dashboard.html:7 — Raw hex color found. Evidence: e Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>"
+      ],
+      "recommended_fix": [
+        "Move styling to design-system primitives or tokens unless truly dynamic.",
+        "Prefer named spacing/color/radius tokens for repeatable component design.",
+        "Prefer semantic color tokens and document new token additions."
+      ],
+      "acceptance_criteria": [
+        "New UI uses shared primitives/tokens; raw style exceptions are documented and minimal."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 4,
+        "confidence": 0.75
+      }
+    },
+    {
+      "code": "D",
+      "name": "Hirarki Informasi",
+      "weight": 10.0,
+      "severity": 0.0,
+      "weighted_score": 0.0,
+      "evidence": [
+        "[skipped-heading-risk] sloppy_dashboard.html:5 — Heading found; hierarchy will be checked globally. Evidence: adient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shad",
+        "[skipped-heading-risk] sloppy_dashboard.html:6 — Heading found; hierarchy will be checked globally. Evidence: let-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"backg",
+        "[too-many-cards] sloppy_dashboard.html:7 — Card/panel pattern found; density will be checked globally. Evidence: <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active u",
+        "[too-many-cards] sloppy_dashboard.html:11 — Card/panel pattern found; density will be checked globally. Evidence: ers increased</p>         <a href=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <"
+      ],
+      "recommended_fix": [
+        "Keep heading levels sequential and meaningful.",
+        "Group cards by task priority and avoid equal-weight dashboards."
+      ],
+      "acceptance_criteria": [
+        "Heading order is sequential and visual weight matches task priority."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 4,
+        "confidence": 0.3
+      }
+    },
+    {
+      "code": "E",
+      "name": "Copywriting & Lokalisasi",
+      "weight": 10.0,
+      "severity": 0.5,
+      "weighted_score": 1.0,
+      "evidence": [
+        "[mixed-id-en] sloppy_dashboard.html:5 — English UI term found; check localization consistency. Evidence: nt-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl roun",
+        "[mixed-id-en] sloppy_dashboard.html:5 — English UI term found; check localization consistency. Evidence: om-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px",
+        "[mixed-id-en] sloppy_dashboard.html:6 — English UI term found; check localization consistency. Evidence: 500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#",
+        "[mixed-id-en] sloppy_dashboard.html:8 — English UI term found; check localization consistency. Evidence: ss=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <div clas"
+      ],
+      "recommended_fix": [
+        "Localize terms or document intentional product vocabulary.",
+        "Keep language style consistent."
+      ],
+      "acceptance_criteria": [
+        "User-facing copy follows one language policy and approved glossary."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 9,
+        "confidence": 0.45
+      }
+    },
+    {
+      "code": "F",
+      "name": "State & Status Logic",
+      "weight": 10.0,
+      "severity": 2.1,
+      "weighted_score": 4.2,
+      "evidence": [
+        "[status-taxonomy-sprawl] global — Many status labels detected; taxonomy may be inconsistent. Evidence: absen, active, aktif, belum, completed, ditinjau, error, hadir, pending, perlu, sudah",
+        "[status-word] sloppy_dashboard.html:6 — Status label found; taxonomy will be checked globally. Evidence: 500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#",
+        "[status-word] sloppy_dashboard.html:8 — Status label found; taxonomy will be checked globally. Evidence: ss=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <div clas",
+        "[status-word] sloppy_dashboard.html:14 — Status label found; taxonomy will be checked globally. Evidence: tar.png\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example."
+      ],
+      "recommended_fix": [
+        "Create a status taxonomy table with dimensions, allowed values, and UI placement.",
+        "Map each label to a status dimension and allowed values."
+      ],
+      "acceptance_criteria": [
+        "Status labels map to a documented taxonomy with allowed values and state transitions."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 15,
+        "confidence": 0.8
+      }
+    },
+    {
+      "code": "G",
+      "name": "Aksesibilitas",
+      "weight": 10.0,
+      "severity": 1.3,
+      "weighted_score": 2.6,
+      "evidence": [
+        "[img-alt-missing] sloppy_dashboard.html:12 — Image without alt attribute. Evidence: </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button>         <div onClick=\"d",
+        "[icon-button] sloppy_dashboard.html:13 — Icon-only button may lack accessible name. Evidence: d backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <",
+        "[clickable-div] sloppy_dashboard.html:14 — Clickable div found. Evidence: \">         <img src=\"/avatar.png\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe"
+      ],
+      "recommended_fix": [
+        "Add meaningful alt text or alt=\"\" for decorative images.",
+        "Add aria-label or visible text for icon-only controls.",
+        "Use button/a semantics or add role, tabindex, and keyboard handlers."
+      ],
+      "acceptance_criteria": [
+        "Interactive elements have accessible names, keyboard path, visible focus, and non-color-only status cues."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 3,
+        "confidence": 0.95
+      }
+    },
+    {
+      "code": "H",
+      "name": "Layout & Responsiveness",
+      "weight": 8.0,
+      "severity": 0.8,
+      "weighted_score": 1.28,
+      "evidence": [
+        "[fixed-px] sloppy_dashboard.html:11 — Fixed pixel dimension found. Evidence: ef=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button>"
+      ],
+      "recommended_fix": [
+        "Use responsive constraints, min/max, grid/flex, and breakpoint tokens."
+      ],
+      "acceptance_criteria": [
+        "Screen is verified at mobile/tablet/desktop breakpoints without accidental horizontal overflow."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 1,
+        "confidence": 0.7
+      }
+    },
+    {
+      "code": "I",
+      "name": "Orisinalitas Visual",
+      "weight": 8.0,
+      "severity": 1.6,
+      "weighted_score": 2.56,
+      "evidence": [
+        "[gradient-text] sloppy_dashboard.html:4 — Gradient/text visual cliché found. Evidence: <!doctype html> <html>   <body>     <main class=\"bg-gradient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Da",
+        "[gradient-text] sloppy_dashboard.html:4 — Gradient/text visual cliché found. Evidence: <html>   <body>     <main class=\"bg-gradient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>",
+        "[gradient-text] sloppy_dashboard.html:4 — Gradient/text visual cliché found. Evidence: <main class=\"bg-gradient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div clas",
+        "[glassmorphism] sloppy_dashboard.html:11 — Glassmorphism visual cliché found. Evidence: ncreased</p>         <a href=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></"
+      ],
+      "recommended_fix": [
+        "Use domain-specific visual hierarchy instead of decorative gradients.",
+        "Keep transparency effects only where they improve usability.",
+        "Use brand/domain color semantics rather than generic AI palette."
+      ],
+      "acceptance_criteria": [
+        "Visual identity supports product/domain meaning instead of generic AI-dashboard decoration."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 7,
+        "confidence": 0.7
+      }
+    },
+    {
+      "code": "J",
+      "name": "Production Readiness",
+      "weight": 5.0,
+      "severity": 1.0,
+      "weighted_score": 1.0,
+      "evidence": [
+        "[no-error-handling] sloppy_dashboard.html:22 — Empty error handling found. Evidence: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e) {}       </script>     </main>   </body> </html>",
+        "[console-log] sloppy_dashboard.html:21 — Console logging found. Evidence: ipt>         const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e) {}       </script>"
+      ],
+      "recommended_fix": [
+        "Surface recoverable error states and log useful diagnostics.",
+        "Use structured telemetry or remove debug logs."
+      ],
+      "acceptance_criteria": [
+        "Loading, empty, error, permission, observability, and automated verification are present for production paths."
+      ],
+      "engine_notes": {
+        "mode": "static_code_heuristic",
+        "finding_count": 2,
+        "confidence": 0.85
+      }
+    }
+  ],
+  "total_score": 29.14,
+  "rounded_score": 29,
+  "band": "mild_moderate_slop",
+  "decision": "block",
+  "summary": "Demo after-audit used to exercise ADSI diff command.",
+  "priority_fixes": [
+    "A Realisme Data & Domain: Move demo data behind fixtures and connect production UI to real data contracts.",
+    "B Kejelasan Workflow: Replace dead href with a real route, disabled state explanation, or remove CTA.",
+    "G Aksesibilitas: Add meaningful alt text or alt=\"\" for decorative images.",
+    "F State & Status Logic: Create a status taxonomy table with dimensions, allowed values, and UI placement.",
+    "I Orisinalitas Visual: Use domain-specific visual hierarchy instead of decorative gradients."
+  ],
+  "findings": [
+    {
+      "rule_id": "mock-data",
+      "area": "A",
+      "severity_hint": 2.5,
+      "confidence": 0.7,
+      "message": "Mock/demo/hardcoded data signal found in UI path.",
+      "evidence": "Absen</p>         <p>Coming soon</p>       </div>       <script>         const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 20,
+      "fix": "Move demo data behind fixtures and connect production UI to real data contracts."
+    },
+    {
+      "rule_id": "mock-data",
+      "area": "A",
+      "severity_hint": 2.5,
+      "confidence": 0.7,
+      "message": "Mock/demo/hardcoded data signal found in UI path.",
+      "evidence": "const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e) {}       </script>     </main>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 21,
+      "fix": "Move demo data behind fixtures and connect production UI to real data contracts."
+    },
+    {
+      "rule_id": "dummy-copy",
+      "area": "A",
+      "severity_hint": 2.0,
+      "confidence": 0.8,
+      "message": "Placeholder/dummy data or copy found.",
+      "evidence": "/svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pend",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 15,
+      "fix": "Replace placeholder content with domain-realistic data and explicit data scope."
+    },
+    {
+      "rule_id": "dummy-copy",
+      "area": "A",
+      "severity_hint": 2.0,
+      "confidence": 0.8,
+      "message": "Placeholder/dummy data or copy found.",
+      "evidence": "n>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Complet",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 15,
+      "fix": "Replace placeholder content with domain-realistic data and explicit data scope."
+    },
+    {
+      "rule_id": "dummy-copy",
+      "area": "A",
+      "severity_hint": 2.0,
+      "confidence": 0.8,
+      "message": "Placeholder/dummy data or copy found.",
+      "evidence": "onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Su",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 15,
+      "fix": "Replace placeholder content with domain-realistic data and explicit data scope."
+    },
+    {
+      "rule_id": "dummy-copy",
+      "area": "A",
+      "severity_hint": 2.0,
+      "confidence": 0.8,
+      "message": "Placeholder/dummy data or copy found.",
+      "evidence": ")\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, A",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 15,
+      "fix": "Replace placeholder content with domain-realistic data and explicit data scope."
+    },
+    {
+      "rule_id": "dummy-copy",
+      "area": "A",
+      "severity_hint": 2.0,
+      "confidence": 0.8,
+      "message": "Placeholder/dummy data or copy found.",
+      "evidence": ">Coming soon</p>       </div>       <script>         const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)         try { throw new Er",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 20,
+      "fix": "Replace placeholder content with domain-realistic data and explicit data scope."
+    },
+    {
+      "rule_id": "unscoped-metric-copy",
+      "area": "A",
+      "severity_hint": 1.2,
+      "confidence": 0.45,
+      "message": "Metric-like copy lacks visible time/scope/source context.",
+      "evidence": "500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 6,
+      "fix": "Add scope, period, filter, and freshness copy near each metric."
+    },
+    {
+      "rule_id": "unscoped-metric-copy",
+      "area": "A",
+      "severity_hint": 1.2,
+      "confidence": 0.45,
+      "message": "Metric-like copy lacks visible time/scope/source context.",
+      "evidence": "iv class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <d",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 8,
+      "fix": "Add scope, period, filter, and freshness copy near each metric."
+    },
+    {
+      "rule_id": "unscoped-metric-copy",
+      "area": "A",
+      "severity_hint": 1.2,
+      "confidence": 0.45,
+      "message": "Metric-like copy lacks visible time/scope/source context.",
+      "evidence": "ss=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <div clas",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 8,
+      "fix": "Add scope, period, filter, and freshness copy near each metric."
+    },
+    {
+      "rule_id": "unscoped-metric-copy",
+      "area": "A",
+      "severity_hint": 1.2,
+      "confidence": 0.45,
+      "message": "Metric-like copy lacks visible time/scope/source context.",
+      "evidence": "psum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Add scope, period, filter, and freshness copy near each metric."
+    },
+    {
+      "rule_id": "unscoped-metric-copy",
+      "area": "A",
+      "severity_hint": 1.2,
+      "confidence": 0.45,
+      "message": "Metric-like copy lacks visible time/scope/source context.",
+      "evidence": "le data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Add scope, period, filter, and freshness copy near each metric."
+    },
+    {
+      "rule_id": "unscoped-metric-copy",
+      "area": "A",
+      "severity_hint": 1.2,
+      "confidence": 0.45,
+      "message": "Metric-like copy lacks visible time/scope/source context.",
+      "evidence": "</div>       <script>         const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 20,
+      "fix": "Add scope, period, filter, and freshness copy near each metric."
+    },
+    {
+      "rule_id": "dead-href",
+      "area": "B",
+      "severity_hint": 3.5,
+      "confidence": 0.9,
+      "message": "Dead link/CTA found.",
+      "evidence": "le=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 9,
+      "fix": "Replace dead href with a real route, disabled state explanation, or remove CTA."
+    },
+    {
+      "rule_id": "coming-soon",
+      "area": "B",
+      "severity_hint": 2.5,
+      "confidence": 0.8,
+      "message": "Unfinished workflow copy found.",
+      "evidence": "us: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>       <script>         const mockData = [{ name: 'Jane Doe', s",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 17,
+      "fix": "Provide a real fallback path, permission reason, or release-gated state."
+    },
+    {
+      "rule_id": "passive-alert",
+      "area": "B",
+      "severity_hint": 1.0,
+      "confidence": 0.4,
+      "message": "Problem/alert language found; verify it has an action path.",
+      "evidence": "tar.png\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 14,
+      "fix": "Pair each alert with owner, next action, due time, and filtered worklist route."
+    },
+    {
+      "rule_id": "inline-style",
+      "area": "C",
+      "severity_hint": 1.8,
+      "confidence": 0.75,
+      "message": "Inline style found.",
+      "evidence": "1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 7,
+      "fix": "Move styling to design-system primitives or tokens unless truly dynamic."
+    },
+    {
+      "rule_id": "tailwind-arbitrary",
+      "area": "C",
+      "severity_hint": 1.4,
+      "confidence": 0.7,
+      "message": "Arbitrary utility class found.",
+      "evidence": "oard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 7,
+      "fix": "Prefer named spacing/color/radius tokens for repeatable component design."
+    },
+    {
+      "rule_id": "tailwind-arbitrary",
+      "area": "C",
+      "severity_hint": 1.4,
+      "confidence": 0.7,
+      "message": "Arbitrary utility class found.",
+      "evidence": "ef=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 11,
+      "fix": "Prefer named spacing/color/radius tokens for repeatable component design."
+    },
+    {
+      "rule_id": "hex-color",
+      "area": "C",
+      "severity_hint": 1.1,
+      "confidence": 0.6,
+      "message": "Raw hex color found.",
+      "evidence": "e Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 7,
+      "fix": "Prefer semantic color tokens and document new token additions."
+    },
+    {
+      "rule_id": "skipped-heading-risk",
+      "area": "D",
+      "severity_hint": 0.2,
+      "confidence": 0.3,
+      "message": "Heading found; hierarchy will be checked globally.",
+      "evidence": "adient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shad",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 5,
+      "fix": "Keep heading levels sequential and meaningful."
+    },
+    {
+      "rule_id": "skipped-heading-risk",
+      "area": "D",
+      "severity_hint": 0.2,
+      "confidence": 0.3,
+      "message": "Heading found; hierarchy will be checked globally.",
+      "evidence": "let-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"backg",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 6,
+      "fix": "Keep heading levels sequential and meaningful."
+    },
+    {
+      "rule_id": "too-many-cards",
+      "area": "D",
+      "severity_hint": 0.2,
+      "confidence": 0.25,
+      "message": "Card/panel pattern found; density will be checked globally.",
+      "evidence": "<h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active u",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 7,
+      "fix": "Group cards by task priority and avoid equal-weight dashboards."
+    },
+    {
+      "rule_id": "too-many-cards",
+      "area": "D",
+      "severity_hint": 0.2,
+      "confidence": 0.25,
+      "message": "Card/panel pattern found; density will be checked globally.",
+      "evidence": "ers increased</p>         <a href=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 11,
+      "fix": "Group cards by task priority and avoid equal-weight dashboards."
+    },
+    {
+      "rule_id": "mixed-id-en",
+      "area": "E",
+      "severity_hint": 0.8,
+      "confidence": 0.45,
+      "message": "English UI term found; check localization consistency.",
+      "evidence": "nt-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl roun",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 5,
+      "fix": "Localize terms or document intentional product vocabulary."
+    },
+    {
+      "rule_id": "mixed-id-en",
+      "area": "E",
+      "severity_hint": 0.8,
+      "confidence": 0.45,
+      "message": "English UI term found; check localization consistency.",
+      "evidence": "om-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 5,
+      "fix": "Localize terms or document intentional product vocabulary."
+    },
+    {
+      "rule_id": "mixed-id-en",
+      "area": "E",
+      "severity_hint": 0.8,
+      "confidence": 0.45,
+      "message": "English UI term found; check localization consistency.",
+      "evidence": "500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 6,
+      "fix": "Localize terms or document intentional product vocabulary."
+    },
+    {
+      "rule_id": "mixed-id-en",
+      "area": "E",
+      "severity_hint": 0.8,
+      "confidence": 0.45,
+      "message": "English UI term found; check localization consistency.",
+      "evidence": "ss=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <div clas",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 8,
+      "fix": "Localize terms or document intentional product vocabulary."
+    },
+    {
+      "rule_id": "mixed-id-en",
+      "area": "E",
+      "severity_hint": 0.8,
+      "confidence": 0.45,
+      "message": "English UI term found; check localization consistency.",
+      "evidence": "round:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 9,
+      "fix": "Localize terms or document intentional product vocabulary."
+    },
+    {
+      "rule_id": "mixed-id-en",
+      "area": "E",
+      "severity_hint": 0.8,
+      "confidence": 0.45,
+      "message": "English UI term found; check localization consistency.",
+      "evidence": "psum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Localize terms or document intentional product vocabulary."
+    },
+    {
+      "rule_id": "mixed-id-en",
+      "area": "E",
+      "severity_hint": 0.8,
+      "confidence": 0.45,
+      "message": "English UI term found; check localization consistency.",
+      "evidence": "le data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Localize terms or document intentional product vocabulary."
+    },
+    {
+      "rule_id": "mixed-id-en",
+      "area": "E",
+      "severity_hint": 0.8,
+      "confidence": 0.45,
+      "message": "English UI term found; check localization consistency.",
+      "evidence": "</div>       <script>         const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 20,
+      "fix": "Localize terms or document intentional product vocabulary."
+    },
+    {
+      "rule_id": "id-term",
+      "area": "E",
+      "severity_hint": 0.1,
+      "confidence": 0.2,
+      "message": "Indonesian UI term found; mixed-language check will be computed globally.",
+      "evidence": "lorem ipsum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming so",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Keep language style consistent."
+    },
+    {
+      "rule_id": "status-taxonomy-sprawl",
+      "area": "F",
+      "severity_hint": 3.2,
+      "confidence": 0.8,
+      "message": "Many status labels detected; taxonomy may be inconsistent.",
+      "evidence": "absen, active, aktif, belum, completed, ditinjau, error, hadir, pending, perlu, sudah",
+      "path": null,
+      "line": null,
+      "fix": "Create a status taxonomy table with dimensions, allowed values, and UI placement."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div class=\"card shadow-xl rounded-[19px]\" style=\"background:#",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 6,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "ss=\"card shadow-xl rounded-[19px]\" style=\"background:#8b5cf6\">         <p>Total active users increased</p>         <a href=\"#\">Review</a>       </div>       <div clas",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 8,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "tar.png\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 14,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "g\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe at john@example.com</p>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 14,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "lorem ipsum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming so",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "psum sample data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "le data for John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "John Doe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>       <",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "oe at john@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>       <script>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "ohn@example.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>       <script>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "mple.com</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>       <script>         const",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "m</p>         <p>Status: Aktif, Pending, Completed, Belum, Sudah, Perlu, Hadir, Absen</p>         <p>Coming soon</p>       </div>       <script>         const mockDa",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 16,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "</div>       <script>         const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 20,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "status-word",
+      "area": "F",
+      "severity_hint": 0.4,
+      "confidence": 0.35,
+      "message": "Status label found; taxonomy will be checked globally.",
+      "evidence": "oe', status: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e) {}       </script>     </main>   </body> </html>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 22,
+      "fix": "Map each label to a status dimension and allowed values."
+    },
+    {
+      "rule_id": "img-alt-missing",
+      "area": "G",
+      "severity_hint": 3.0,
+      "confidence": 0.95,
+      "message": "Image without alt attribute.",
+      "evidence": "</div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button>         <div onClick=\"d",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 12,
+      "fix": "Add meaningful alt text or alt=\"\" for decorative images."
+    },
+    {
+      "rule_id": "icon-button",
+      "area": "G",
+      "severity_hint": 2.8,
+      "confidence": 0.8,
+      "message": "Icon-only button may lack accessible name.",
+      "evidence": "d backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 13,
+      "fix": "Add aria-label or visible text for icon-only controls."
+    },
+    {
+      "rule_id": "clickable-div",
+      "area": "G",
+      "severity_hint": 2.6,
+      "confidence": 0.85,
+      "message": "Clickable div found.",
+      "evidence": "\">         <img src=\"/avatar.png\">         <button><svg></svg></button>         <div onClick=\"doThing()\">Perlu Ditinjau</div>         <p>lorem ipsum sample data for John Doe",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 14,
+      "fix": "Use button/a semantics or add role, tabindex, and keyboard handlers."
+    },
+    {
+      "rule_id": "fixed-px",
+      "area": "H",
+      "severity_hint": 1.8,
+      "confidence": 0.7,
+      "message": "Fixed pixel dimension found.",
+      "evidence": "ef=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 11,
+      "fix": "Use responsive constraints, min/max, grid/flex, and breakpoint tokens."
+    },
+    {
+      "rule_id": "gradient-text",
+      "area": "I",
+      "severity_hint": 1.8,
+      "confidence": 0.7,
+      "message": "Gradient/text visual cliché found.",
+      "evidence": "<!doctype html> <html>   <body>     <main class=\"bg-gradient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Da",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 4,
+      "fix": "Use domain-specific visual hierarchy instead of decorative gradients."
+    },
+    {
+      "rule_id": "gradient-text",
+      "area": "I",
+      "severity_hint": 1.8,
+      "confidence": 0.7,
+      "message": "Gradient/text visual cliché found.",
+      "evidence": "<html>   <body>     <main class=\"bg-gradient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 4,
+      "fix": "Use domain-specific visual hierarchy instead of decorative gradients."
+    },
+    {
+      "rule_id": "gradient-text",
+      "area": "I",
+      "severity_hint": 1.8,
+      "confidence": 0.7,
+      "message": "Gradient/text visual cliché found.",
+      "evidence": "<main class=\"bg-gradient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3>Active Users</h3>       <div clas",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 4,
+      "fix": "Use domain-specific visual hierarchy instead of decorative gradients."
+    },
+    {
+      "rule_id": "glassmorphism",
+      "area": "I",
+      "severity_hint": 1.4,
+      "confidence": 0.65,
+      "message": "Glassmorphism visual cliché found.",
+      "evidence": "ncreased</p>         <a href=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 11,
+      "fix": "Keep transparency effects only where they improve usability."
+    },
+    {
+      "rule_id": "glassmorphism",
+      "area": "I",
+      "severity_hint": 1.4,
+      "confidence": 0.65,
+      "message": "Glassmorphism visual cliché found.",
+      "evidence": "<a href=\"#\">Review</a>       </div>       <div class=\"card backdrop-blur bg-white/20 w-[720px]\">         <img src=\"/avatar.png\">         <button><svg></svg></button",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 11,
+      "fix": "Keep transparency effects only where they improve usability."
+    },
+    {
+      "rule_id": "purple-palette",
+      "area": "I",
+      "severity_hint": 1.2,
+      "confidence": 0.55,
+      "message": "Purple/violet AI-dashboard palette signal found.",
+      "evidence": "<!doctype html> <html>   <body>     <main class=\"bg-gradient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview<",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 4,
+      "fix": "Use brand/domain color semantics rather than generic AI palette."
+    },
+    {
+      "rule_id": "purple-palette",
+      "area": "I",
+      "severity_hint": 1.2,
+      "confidence": 0.55,
+      "message": "Purple/violet AI-dashboard palette signal found.",
+      "evidence": "doctype html> <html>   <body>     <main class=\"bg-gradient-to-r from-purple-500 to-violet-500 text-transparent bg-clip-text\">       <h1>Dashboard Overview</h1>       <h3",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 4,
+      "fix": "Use brand/domain color semantics rather than generic AI palette."
+    },
+    {
+      "rule_id": "no-error-handling",
+      "area": "J",
+      "severity_hint": 3.0,
+      "confidence": 0.85,
+      "message": "Empty error handling found.",
+      "evidence": "'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e) {}       </script>     </main>   </body> </html>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 22,
+      "fix": "Surface recoverable error states and log useful diagnostics."
+    },
+    {
+      "rule_id": "console-log",
+      "area": "J",
+      "severity_hint": 1.3,
+      "confidence": 0.6,
+      "message": "Console logging found.",
+      "evidence": "ipt>         const mockData = [{ name: 'Jane Doe', status: 'pending' }]         console.log(mockData)         try { throw new Error('x') } catch (e) {}       </script>",
+      "path": "examples/sloppy_dashboard.html",
+      "line": 21,
+      "fix": "Use structured telemetry or remove debug logs."
+    }
+  ],
+  "engine": {
+    "name": "ADSI static heuristic engine",
+    "version": "3.0.0",
+    "limitations": [
+      "Static engine cannot see runtime interaction unless paired with `adsi collect`; use `adsi contrast` for computed contrast.",
+      "Use static scan as CI first-pass, browser collection for DOM evidence, and agent review for workflow judgment."
+    ]
+  }
+}

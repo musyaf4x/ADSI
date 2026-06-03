@@ -1,0 +1,153 @@
+{
+  "version": "3.0.0",
+  "name": "AI Design Slop Index",
+  "short_name": "ADSI",
+  "score_range": [0, 100],
+  "formula": "sum((severity / 5) * weight for all areas)",
+  "severity_scale": {
+    "0": "Tidak ada masalah teramati",
+    "1": "Minor; polish atau edge case",
+    "2": "Terlihat; mengurangi kepercayaan tapi belum menghalangi tugas utama",
+    "3": "Mengganggu; pengguna butuh menebak atau workaround",
+    "4": "Kuat indikasi slop; workflow/data/state tidak layak ship tanpa repair",
+    "5": "Sangat slop; UI/proses tidak siap produk"
+  },
+  "thresholds": {
+    "low_slop": {"range": [0, 19], "decision": "Production-ready dengan minor polish"},
+    "mild_moderate_slop": {"range": [20, 39], "decision": "Perlu repair terarah sebelum rilis"},
+    "high_slop": {"range": [40, 59], "decision": "Redesign sebagian dan validasi workflow"},
+    "severe_slop": {"range": [60, 100], "decision": "Jangan ship; ulangi struktur, data, dan workflow"}
+  },
+  "areas": [
+    {
+      "code": "A",
+      "name": "Realisme Data & Domain",
+      "weight": 15,
+      "intent": "Data, angka, istilah, dan cakupan terasa seperti operasi produk nyata, bukan placeholder.",
+      "anchors": {
+        "0": "Data punya scope, sumber, waktu, dan hubungan antar-metrik jelas.",
+        "2": "Ada sebagian placeholder atau scope kurang eksplisit, tetapi domain masih masuk akal.",
+        "4": "Banyak sample/mock/hardcoded data, angka tidak terhubung, atau istilah domain generik.",
+        "5": "Mayoritas data dummy atau tidak bisa dipakai untuk keputusan operasional."
+      },
+      "signals": ["dummy_data", "hardcoded_arrays", "unscoped_metrics", "placeholder_copy"]
+    },
+    {
+      "code": "B",
+      "name": "Kejelasan Workflow",
+      "weight": 12,
+      "intent": "Pengguna tahu aksi berikutnya, problem card bisa ditindaklanjuti, dan alur tidak berhenti di dekorasi.",
+      "anchors": {
+        "0": "Setiap insight penting punya CTA, drill-down, atau state lanjutan yang jelas.",
+        "2": "Sebagian aksi tersedia tetapi masih ada alert/metric pasif.",
+        "4": "Banyak CTA kosong, href '#', coming soon, atau problem tanpa jalur perbaikan.",
+        "5": "Workflow inti buntu atau tidak bisa dieksekusi."
+      },
+      "signals": ["dead_cta", "passive_alert", "missing_drilldown", "todo_workflow"]
+    },
+    {
+      "code": "C",
+      "name": "Konsistensi Design System",
+      "weight": 12,
+      "intent": "Token warna, radius, shadow, spacing, dan komponen sejenis dipakai sistematis.",
+      "anchors": {
+        "0": "Komponen mengikuti primitive/design token yang konsisten.",
+        "2": "Ada variasi minor tetapi tidak merusak pola.",
+        "4": "Banyak inline style, arbitrary utility, warna/shadow/radius tidak terkendali.",
+        "5": "Setiap bagian terlihat dibuat ad-hoc tanpa sistem."
+      },
+      "signals": ["inline_styles", "many_hex_colors", "tailwind_arbitrary", "inconsistent_radius_shadow"]
+    },
+    {
+      "code": "D",
+      "name": "Hirarki Informasi",
+      "weight": 10,
+      "intent": "Judul, metrik, tabel, dan aksi tersusun sesuai prioritas tugas pengguna.",
+      "anchors": {
+        "0": "Heading, section, dan fokus visual mendukung tugas utama.",
+        "2": "Ada repetisi/urutan kurang tajam tapi masih terbaca.",
+        "4": "Heading lompat, banyak card setara, duplikasi konteks, atau tabel tanpa prioritas.",
+        "5": "Pengguna sulit memahami apa yang penting."
+      },
+      "signals": ["duplicate_headings", "skipped_heading_levels", "too_many_equal_cards"]
+    },
+    {
+      "code": "E",
+      "name": "Copywriting & Lokalisasi",
+      "weight": 10,
+      "intent": "Bahasa, istilah, angka, tanggal, microcopy, dan tone konsisten dengan konteks lokal/domain.",
+      "anchors": {
+        "0": "Copy jelas, lokal, spesifik, dan membantu keputusan.",
+        "2": "Ada campuran bahasa atau frasa generik yang masih mudah diperbaiki.",
+        "4": "Banyak buzzword, placeholder, campuran bahasa, atau microcopy ambigu.",
+        "5": "Copy tidak dapat dipercaya atau tidak sesuai domain."
+      },
+      "signals": ["mixed_language", "ai_buzzwords", "ambiguous_microcopy", "em_dash_overuse"]
+    },
+    {
+      "code": "F",
+      "name": "State & Status Logic",
+      "weight": 10,
+      "intent": "Status punya taxonomy eksplisit dan tidak mencampur dimensi temporal, approval, progress, dan health.",
+      "anchors": {
+        "0": "Status dipisah per dimensi, terdokumentasi, dan dipakai konsisten.",
+        "2": "Sebagian label overlap tetapi masih bisa dipahami.",
+        "4": "Label status banyak, tumpang tindih, tidak punya mapping, atau dipakai lintas kolom tanpa aturan.",
+        "5": "Status tidak menjawab pertanyaan operasional apa pun."
+      },
+      "signals": ["status_overlap", "too_many_statuses", "missing_empty_error_loading"]
+    },
+    {
+      "code": "G",
+      "name": "Aksesibilitas",
+      "weight": 10,
+      "intent": "UI dapat dipakai dengan keyboard, screen reader, kontras memadai, dan tidak hanya mengandalkan warna.",
+      "anchors": {
+        "0": "Semantic markup, labels, focus states, contrast, dan keyboard path jelas.",
+        "2": "Ada beberapa gap minor seperti aria-label atau alt kosong.",
+        "4": "Banyak interactive div, icon-only button tanpa label, alt hilang, focus state tidak ada.",
+        "5": "UI tidak usable untuk aksesibilitas dasar."
+      },
+      "signals": ["missing_alt", "icon_button_unlabelled", "clickable_div", "missing_focus_state"]
+    },
+    {
+      "code": "H",
+      "name": "Layout & Responsiveness",
+      "weight": 8,
+      "intent": "Layout tetap usable di breakpoint target; density, scroll, sidebar, dan panel terasa disengaja.",
+      "anchors": {
+        "0": "Responsive behavior jelas dan diuji.",
+        "2": "Ada fixed sizing minor atau breakpoint kurang lengkap.",
+        "4": "Banyak fixed px width/height, absolute positioning, overflow horizontal, atau grid tidak adaptif.",
+        "5": "Layout pecah pada layar umum."
+      },
+      "signals": ["fixed_dimensions", "absolute_positioning", "overflow_x", "missing_responsive_classes"]
+    },
+    {
+      "code": "I",
+      "name": "Orisinalitas Visual",
+      "weight": 8,
+      "intent": "Identitas visual memperkuat fungsi dan domain, bukan sekadar klise AI dashboard.",
+      "anchors": {
+        "0": "Visual identity spesifik produk dan mendukung tugas.",
+        "2": "Masih generik tetapi detail domain cukup membantu.",
+        "4": "Bergantung pada gradient text, glassmorphism, purple palette, icon tiles, dan kartu generik.",
+        "5": "Terlihat seperti template tanpa identitas produk."
+      },
+      "signals": ["gradient_text", "purple_ai_palette", "glassmorphism", "generic_icon_tiles"]
+    },
+    {
+      "code": "J",
+      "name": "Production Readiness",
+      "weight": 5,
+      "intent": "Ada loading/empty/error/permission states, observability, test, dan gate rilis yang dapat diulang.",
+      "anchors": {
+        "0": "States, tests, telemetry, dan release gate tersedia.",
+        "2": "Sebagian state/test ada tetapi belum lengkap.",
+        "4": "Tidak ada state penting, test minim, dan output sulit diverifikasi.",
+        "5": "Tidak ada mekanisme production verification."
+      },
+      "signals": ["missing_states", "missing_tests", "no_error_handling", "no_filters_pagination"]
+    }
+  ]
+}

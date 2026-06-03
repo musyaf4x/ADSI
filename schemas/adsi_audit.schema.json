@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adsi.local/schemas/adsi_audit.v3.schema.json",
+  "title": "ADSI Audit Result v3",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["metadata", "areas", "total_score", "rounded_score", "band", "summary", "priority_fixes"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["product", "screen", "auditor", "date", "rubric_version"],
+      "properties": {
+        "product": {"type": "string", "minLength": 1},
+        "screen": {"type": "string", "minLength": 1},
+        "auditor": {"type": "string", "minLength": 1},
+        "date": {"type": "string", "minLength": 1},
+        "rubric_version": {"type": "string", "minLength": 1},
+        "mode": {"type": "string"},
+        "input_artifacts": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "areas": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["code", "name", "weight", "severity", "weighted_score", "evidence", "recommended_fix", "acceptance_criteria"],
+        "properties": {
+          "code": {"type": "string", "pattern": "^[A-J]$"},
+          "name": {"type": "string", "minLength": 1},
+          "weight": {"type": "number", "minimum": 0, "maximum": 100},
+          "severity": {"type": "number", "minimum": 0, "maximum": 5},
+          "weighted_score": {"type": "number", "minimum": 0, "maximum": 100},
+          "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "recommended_fix": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "acceptance_criteria": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "engine_notes": {"type": "object"}
+        }
+      }
+    },
+    "total_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "rounded_score": {"type": "integer", "minimum": 0, "maximum": 100},
+    "band": {"type": "string", "enum": ["low_slop", "mild_moderate_slop", "high_slop", "severe_slop"]},
+    "decision": {"type": "string", "enum": ["pass", "warn", "block"]},
+    "summary": {"type": "string", "minLength": 1},
+    "priority_fixes": {"type": "array", "items": {"type": "string"}},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule_id", "area", "severity_hint", "confidence", "message", "evidence"],
+        "properties": {
+          "rule_id": {"type": "string"},
+          "area": {"type": "string", "pattern": "^[A-J]$"},
+          "severity_hint": {"type": "number"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "message": {"type": "string"},
+          "evidence": {"type": "string"},
+          "path": {"type": ["string", "null"]},
+          "line": {"type": ["integer", "null"]},
+          "fix": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "before_after_target": {
+      "type": "object",
+      "properties": {
+        "baseline_score": {"type": "number"},
+        "target_score": {"type": "number"},
+        "must_reduce": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

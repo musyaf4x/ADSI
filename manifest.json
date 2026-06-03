@@ -1,0 +1,36 @@
+{
+  "name": "ADSI Agent Kit",
+  "version": "3.0.0",
+  "description": "AI Design Slop Index production stack: audit engine, browser collector, contrast checker, SARIF, diff, MCP, and agent adapters.",
+  "primary_cli": "adsi",
+  "release_gate": {
+    "pass_below": 20,
+    "warn_range": [20, 39],
+    "block_at_or_above": 40
+  },
+  "features": [
+    "Static heuristic scan",
+    "Browser collection with Playwright",
+    "Computed style contrast checker",
+    "Markdown report",
+    "SARIF 2.1.0 report",
+    "Before/after diff",
+    "MCP-compatible stdio server",
+    "Antigravity /adsi [do] [target] workflow",
+    "Agent adapters",
+    "Optional Node browser collector"
+  ],
+  "commands": [
+    "adsi scan",
+    "adsi collect",
+    "adsi contrast",
+    "adsi sarif",
+    "adsi diff",
+    "adsi gate",
+    "adsi validate",
+    "adsi score",
+    "adsi init",
+    "adsi do",
+    "adsi mcp"
+  ]
+}

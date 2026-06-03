@@ -1,0 +1,24 @@
+{
+  "engine": "ADSI contrast checker",
+  "version": "3.0.0",
+  "issue_count": 1,
+  "issues": [
+    {
+      "selector": "body > main > p",
+      "text": "Low contrast helper text",
+      "foreground": "rgb(160, 160, 160)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 2.61,
+      "required": 4.5,
+      "level": "normal",
+      "path": "tests/fixtures/computed-styles-low-contrast.json",
+      "fix": "Increase foreground/background contrast or use an approved accessible color token.",
+      "rule_id": "contrast-ratio",
+      "area": "G",
+      "severity_hint": 3.0,
+      "confidence": 0.9,
+      "message": "Text contrast ratio 2.61:1 is below required 4.5:1.",
+      "evidence": "body > main > p text='Low contrast helper text' fg=rgb(160, 160, 160) bg=rgb(255, 255, 255)"
+    }
+  ]
+}

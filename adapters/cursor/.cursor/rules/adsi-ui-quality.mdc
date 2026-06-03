@@ -1,0 +1,17 @@
+---
+description: "ADSI UI quality gate for product screens, dashboards, workflow UIs, and design-system changes."
+globs: ["**/*.{tsx,jsx,ts,js,vue,svelte,astro,html,css,scss,mdx}"]
+alwaysApply: false
+---
+
+# ADSI UI Quality Gate
+
+Apply this rule for UI audit, UI implementation, dashboard/admin screens, product workflow changes, or design-system modifications.
+
+- Use ADSI to score observable slop symptoms; never infer authorship.
+- Target ADSI < 20 for production UI.
+- Fix product logic first: data scope, actionable workflows, state taxonomy, accessibility, and production states.
+- Avoid superficial fixes such as adding extra cards, gradients, shadows, generic icons, or vague marketing copy.
+- Before final answer, include changed files, verification commands, before/after ADSI, and remaining risks.
+
+Required areas: A Data/Domain, B Workflow, C Design System, D Hierarchy, E Copy/Localization, F State Logic, G Accessibility, H Responsiveness, I Visual Originality, J Readiness.
